@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD JavaScript Variable - Izhad Ananda Risan (X PPLG 2)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .az-badge-active {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- TOP HEADER / HERO SECTION WITH STUDENT IDENTITY -->
+    <header class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white border-b border-sky-800/50 shadow-xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-300 border border-sky-400/30 mb-3">
+                        <i class="fa-solid fa-graduation-cap"></i> Lembar Kerja Peserta Didik (LKPD)
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                        Dasar-Dasar PPLG: <span class="text-sky-400">JavaScript Variable</span>
+                    </h1>
+                    <p class="mt-2 text-slate-300 text-sm sm:text-base max-w-2xl">
+                        Dokumentasi materi, latihan interaktif, tantangan pemrograman, refleksi, hingga tugas mandiri JavaScript.
+                    </p>
+                </div>
+
+                <!-- Student Identity Card -->
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700/80 p-5 rounded-2xl shadow-2xl min-w-[280px]">
+                    <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                        <span>Identitas Peserta Didik</span>
+                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-sky-600/30 border border-sky-400/40 flex items-center justify-center text-sky-400 font-bold text-lg">
+                                <i class="fa-solid fa-user-graduate"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Nama Lengkap</p>
+                                <p class="text-base font-bold text-white leading-tight">Izhad Ananda Risan</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 pt-2 border-t border-slate-700/60">
+                            <div class="w-10 h-10 rounded-xl bg-purple-600/30 border border-purple-400/40 flex items-center justify-center text-purple-400 font-bold text-lg">
+                                <i class="fa-solid fa-users-rectangle"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Kelas & Jurusan</p>
+                                <p class="text-base font-bold text-white leading-tight">X PPLG 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- STICKY QUICK JUMP INDEX A - Z -->
+    <div class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm py-2 px-4 transition-all">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-2">
+            <div class="text-xs font-bold uppercase text-slate-500 tracking-wider flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-compass text-sky-600"></i> Navigasi A-Z:
+            </div>
+            <!-- Letter Navigation Grid/Flex -->
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1 w-full overflow-x-auto py-1 scrollbar-none" id="az-nav-container">
+                <!-- A to Z Buttons generated via JavaScript for flexibility -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT LAYOUT WITH SIDEBAR + MAIN ARTICLES -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <!-- QUICK SIDEBAR NAV (Desktop) -->
+            <aside class="hidden lg:block lg:col-span-1">
+                <div class="sticky top-20 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4 max-h-[calc(100vh-6rem)] overflow-y-auto">
+                    <h3 class="font-bold text-slate-900 border-b pb-3 flex items-center justify-between text-sm">
+                        <span>Daftar Bagian LKPD</span>
+                        <span class="text-xs bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full font-semibold">26 Bagian</span>
+                    </h3>
+                    <nav class="space-y-1 text-xs" id="sidebar-menu">
+                        <!-- Populated by JS -->
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- LKPD SECTIONS A - Z CONTENT AREA -->
+            <main class="lg:col-span-3 space-y-8">
+
+                <!-- BAGIAN A -->
+                <section id="bagian-a" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">A</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 1: Dasar Console.log & Konsep Variabel</h2>
+                            <p class="text-xs text-slate-500">Mengenal output dasar dan peran variabel dalam pemrograman</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-sm leading-relaxed text-slate-700">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-slate-900 mb-1">Pertanyaan 1.1:</p>
+                            <p>Apa fungsi dari perintah <code class="bg-slate-200 px-1.5 py-0.5 rounded text-sky-700 font-mono text-xs">console.log()</code> dalam JavaScript?</p>
+                            <div class="mt-2 bg-emerald-50 text-emerald-900 border border-emerald-200 p-3 rounded-lg font-medium">
+                                <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Jawaban:</strong> Perintah <code class="font-mono text-xs bg-emerald-100 px-1 rounded">console.log()</code> digunakan untuk menampilkan output, pesan, nilai variabel, atau informasi debugging ke dalam console browser atau terminal NodeJS.
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-slate-900 mb-1">Pertanyaan 1.2:</p>
+                            <p>Mengapa kita membutuhkan Variabel dalam program JavaScript?</p>
+                            <div class="mt-2 bg-emerald-50 text-emerald-900 border border-emerald-200 p-3 rounded-lg font-medium">
+                                <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Jawaban:</strong> Variabel dibutuhkan sebagai wadah/tempat penyimpanan data sementara di memori komputer sehingga data tersebut dapat diakses, diubah, dan dipergunakan kembali di bagian kode lainnya selama program berjalan.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN B -->
+                <section id="bagian-b" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">B</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Bahan Bacaan & Teori Singkat Deklarasi Variabel</h2>
+                            <p class="text-xs text-slate-500">Perbedaan `var`, `let`, dan `const`</p>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-600 border border-slate-200 rounded-xl overflow-hidden">
+                            <thead class="text-xs uppercase bg-slate-100 text-slate-700 border-b">
+                                <tr>
+                                    <th class="px-4 py-3">Kata Kunci</th>
+                                    <th class="px-4 py-3">Cakupan Scope</th>
+                                    <th class="px-4 py-3">Dapat Di-reassign?</th>
+                                    <th class="px-4 py-3">Rekomendasi Modern</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-3 font-mono font-bold text-amber-600">var</td>
+                                    <td class="px-4 py-3">Function Scope</td>
+                                    <td class="px-4 py-3 text-emerald-600 font-semibold">Ya</td>
+                                    <td class="px-4 py-3 text-rose-500 font-medium">Ditinggalkan (Hindari)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-3 font-mono font-bold text-sky-600">let</td>
+                                    <td class="px-4 py-3">Block Scope ({})</td>
+                                    <td class="px-4 py-3 text-emerald-600 font-semibold">Ya</td>
+                                    <td class="px-4 py-3 text-emerald-600 font-medium">Sangat Direkomendasikan (Nilai Dinamis)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-3 font-mono font-bold text-indigo-600">const</td>
+                                    <td class="px-4 py-3">Block Scope ({})</td>
+                                    <td class="px-4 py-3 text-rose-600 font-semibold">Tidak (Konstan)</td>
+                                    <td class="px-4 py-3 text-emerald-600 font-medium">Sangat Direkomendasikan (Nilai Tetap)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- BAGIAN C -->
+                <section id="bagian-c" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">C</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Catatan Penting: Aturan Penamaan Variabel (Naming Rules)</h2>
+                            <p class="text-xs text-slate-500">Standar baku penulisan variabel dalam JavaScript</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-700 list-disc list-inside bg-amber-50/50 border border-amber-200 p-4 rounded-xl">
+                        <li>Variabel bersifat <strong>Case-Sensitive</strong> (<code class="font-mono text-xs">namaUser</code> berbeda dengan <code class="font-mono text-xs">namauser</code>).</li>
+                        <li>Karakter pertama <strong>tidak boleh</strong> berupa angka. Harus diawali huruf, underscore (<code class="font-mono text-xs">_</code>), atau simbol dolar (<code class="font-mono text-xs">$</code>).</li>
+                        <li>Tidak boleh menggunakan reserved keywords JavaScript (seperti <code class="font-mono text-xs">class, function, let, return, if</code>).</li>
+                        <li>Direkomendasikan menggunakan format <strong>camelCase</strong> untuk multi-kata (contoh: <code class="font-mono text-xs text-sky-700">totalHargaBarang</code>).</li>
+                    </ul>
+                </section>
+
+                <!-- BAGIAN D -->
+                <section id="bagian-d" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">D</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 2: Memperbaiki Pengubahan Nilai `const`</h2>
+                            <p class="text-xs text-slate-500">Analisis dan penanganan TypeError pada variabel konstan</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs overflow-x-auto border border-slate-800">
+                            <p class="text-slate-400">// Kode Bermasalah (Error):</p>
+                            <p><span class="text-purple-400">const</span> pi = <span class="text-amber-300">3.14</span>;</p>
+                            <p>pi = <span class="text-amber-300">3.14159</span>; <span class="text-rose-400">// TypeError: Assignment to constant variable.</span></p>
+                        </div>
+                        <div class="bg-emerald-50 text-emerald-900 border border-emerald-200 p-4 rounded-xl text-sm">
+                            <p class="font-bold text-emerald-800 mb-1"><i class="fa-solid fa-lightbulb"></i> Solusi & Penjelasan Jawaban:</p>
+                            <p>Jika nilai variabel <code class="font-mono text-xs bg-emerald-100 px-1 rounded">pi</code> perlu diubah di tengah eksekusi program, maka deklarasi harus diubah dari <code class="font-mono text-xs font-bold text-indigo-700">const</code> menjadi <code class="font-mono text-xs font-bold text-sky-700">let</code>.</p>
+                            <div class="mt-2 bg-slate-900 text-slate-100 p-3 rounded-lg font-mono text-xs">
+                                <span class="text-sky-400">let</span> pi = <span class="text-amber-300">3.14</span>;<br>
+                                pi = <span class="text-amber-300">3.14159</span>; <span class="text-emerald-400">// Berhasil tanpa error!</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN E -->
+                <section id="bagian-e" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">E</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 3: Operasi Aritmatika Sederhana</h2>
+                            <p class="text-xs text-slate-500">Kalkulasi menggunakan variabel JavaScript</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-sm">
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs border border-slate-800">
+                            <span class="text-sky-400">let</span> angka1 = <span class="text-amber-300">25</span>;<br>
+                            <span class="text-sky-400">let</span> angka2 = <span class="text-amber-300">5</span>;<br>
+                            <span class="text-sky-400">let</span> hasil = angka1 * angka2;<br>
+                            console.log(<span class="text-emerald-300">"Hasil Perkalian:"</span>, hasil);
+                        </div>
+                        <div class="bg-sky-50 border border-sky-200 p-4 rounded-xl text-sky-900 font-medium">
+                            <i class="fa-solid fa-terminal mr-2 text-sky-600"></i>Output Console: <span class="font-mono font-bold text-sky-800">Hasil Perkalian: 125</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN F -->
+                <section id="bagian-f" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">F</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 4: Pengenalan Tipe Data Primitif</h2>
+                            <p class="text-xs text-slate-500">String, Number, Boolean, Undefined, Null</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="p-3 bg-slate-50 border rounded-xl">
+                            <span class="font-bold text-sky-600 block mb-1">1. String</span>
+                            <code class="font-mono text-slate-800">let nama = "Izhad";</code>
+                            <p class="text-slate-500 mt-1">Data berupa teks yang diapit tanda petik.</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 border rounded-xl">
+                            <span class="font-bold text-emerald-600 block mb-1">2. Number</span>
+                            <code class="font-mono text-slate-800">let umur = 16;</code>
+                            <p class="text-slate-500 mt-1">Data numerik bulat maupun desimal.</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 border rounded-xl">
+                            <span class="font-bold text-purple-600 block mb-1">3. Boolean</span>
+                            <code class="font-mono text-slate-800">let isAktif = true;</code>
+                            <p class="text-slate-500 mt-1">Hanya memiliki dua nilai: true atau false.</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 border rounded-xl">
+                            <span class="font-bold text-amber-600 block mb-1">4. Undefined & Null</span>
+                            <code class="font-mono text-slate-800">let x; let y = null;</code>
+                            <p class="text-slate-500 mt-1">Nilai belum didefinisikan atau sengaja dikosongkan.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN G -->
+                <section id="bagian-g" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">G</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 5: Mengecek Tipe Data dengan `typeof`</h2>
+                            <p class="text-xs text-slate-500">Analisis pengujian tipe variabel secara langsung</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-2 mb-4">
+                        <p><span class="text-sky-400">let</span> harga = <span class="text-amber-300">15000</span>;</p>
+                        <p><span class="text-sky-400">let</span> produk = <span class="text-emerald-300">"Buku Tulis"</span>;</p>
+                        <p><span class="text-sky-400">let</span> ready = <span class="text-purple-300">true</span>;</p>
+                        <p class="pt-2 border-t border-slate-800 text-slate-400">// Hasil pengujian typeof:</p>
+                        <p>console.log(<span class="text-sky-300">typeof</span> harga); <span class="text-emerald-400">// "number"</span></p>
+                        <p>console.log(<span class="text-sky-300">typeof</span> produk); <span class="text-emerald-400">// "string"</span></p>
+                        <p>console.log(<span class="text-sky-300">typeof</span> ready); <span class="text-emerald-400">// "boolean"</span></p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN H -->
+                <section id="bagian-h" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">H</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 6: Penggabungan String (String Concatenation vs Template Literals)</h2>
+                            <p class="text-xs text-slate-500">Teknik penyambungan variabel dan string</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="p-3 bg-slate-50 border rounded-xl font-mono text-xs">
+                            <p class="text-slate-500 mb-1">// Cara Lama (Concatenation):</p>
+                            <p>let salam = "Halo, " + nama + "! Selamat datang di kelas " + kelas;</p>
+                        </div>
+                        <div class="p-3 bg-sky-50 border border-sky-200 rounded-xl font-mono text-xs">
+                            <p class="text-sky-700 font-bold mb-1">// Cara Modern (Template Literals / Backticks):</p>
+                            <p class="text-sky-900">let salam = `Halo, ${nama}! Selamat datang di kelas ${kelas}`;</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN I -->
+                <section id="bagian-i" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">I</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 7: Konversi Tipe Data (Type Conversion)</h2>
+                            <p class="text-xs text-slate-500">Mengubah String ke Number dan sebaliknya</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-2">
+                        <p><span class="text-sky-400">let</span> strAngka = <span class="text-emerald-300">"100"</span>;</p>
+                        <p><span class="text-sky-400">let</span> numAngka = Number(strAngka); <span class="text-slate-400">// Mengubah String "100" menjadi Number 100</span></p>
+                        <p>console.log(numAngka + <span class="text-amber-300">50</span>); <span class="text-emerald-400">// Output: 150 (Bukan "10050")</span></p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN J -->
+                <section id="bagian-j" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">J</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 8: Penerapan Penulisan Format camelCase</h2>
+                            <p class="text-xs text-slate-500">Studi kasus konversi nama variabel tidak baku</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-rose-50 border border-rose-200 p-3 rounded-xl">
+                            <span class="font-bold text-rose-700 block mb-1"><i class="fa-solid fa-xmark"></i> Kurang Tepat:</span>
+                            <ul class="space-y-1 font-mono text-slate-700">
+                                <li>let namalengkap = "Izhad";</li>
+                                <li>let total_harga_barang = 50000;</li>
+                                <li>let ISLOGGEDIN = true;</li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl">
+                            <span class="font-bold text-emerald-700 block mb-1"><i class="fa-solid fa-check"></i> Tepat (camelCase Standard):</span>
+                            <ul class="space-y-1 font-mono text-slate-700">
+                                <li>let namaLengkap = "Izhad";</li>
+                                <li>let totalHargaBarang = 50000;</li>
+                                <li>let isLoggedIn = true;</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN K -->
+                <section id="bagian-k" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">K</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 9: Tantangan Biodata Diri Pemrogram</h2>
+                            <p class="text-xs text-slate-500">Membuat variabel biodata lengkap peserta didik</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs overflow-x-auto">
+                        <p><span class="text-purple-400">const</span> namaSiswa = <span class="text-emerald-300">"Izhad Ananda Risan"</span>;</p>
+                        <p><span class="text-purple-400">const</span> kelasSiswa = <span class="text-emerald-300">"X PPLG 2"</span>;</p>
+                        <p><span class="text-sky-400">let</span> umurSiswa = <span class="text-amber-300">16</span>;</p>
+                        <p><span class="text-purple-400">const</span> hobi = <span class="text-emerald-300">"Coding & Gaming"</span>;</p>
+                        <p><span class="text-sky-400">let</span> isSukaJS = <span class="text-purple-300">true</span>;</p>
+                        <p class="mt-2 text-slate-400">console.log(`Halo, nama saya ${namaSiswa} dari kelas ${kelasSiswa}. Umur saya ${umurSiswa} tahun.`);</p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN L -->
+                <section id="bagian-l" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">L</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 10: Analisis Bug / Debugging Kode JavaScript</h2>
+                            <p class="text-xs text-slate-500">Menemukan dan memperbaiki kesalahan sintaksis</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <p class="text-slate-700">Temukan kesalahan pada kode berikut:</p>
+                        <div class="bg-rose-50 border border-rose-200 p-3 rounded-xl font-mono text-xs text-rose-900">
+                            let 123nama = "Budi"; // Salah: Awalan angka<br>
+                            const kota = "Jakarta";<br>
+                            kota = "Bandung"; // Salah: Const diubah nilainya
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl font-mono text-xs text-emerald-900">
+                            <strong class="block mb-1 font-sans text-xs font-bold text-emerald-800">Perbaikan Kode (Benar):</strong>
+                            let nama123 = "Budi";<br>
+                            let kota = "Jakarta";<br>
+                            kota = "Bandung";
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN M -->
+                <section id="bagian-m" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">M</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 11: Struk Belanja & Kalkulasi Diskon Sederhana</h2>
+                            <p class="text-xs text-slate-500">Studi kasus hitung harga akhir barang</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-1">
+                        <p><span class="text-purple-400">const</span> hargaAwal = <span class="text-amber-300">100000</span>;</p>
+                        <p><span class="text-purple-400">const</span> diskonPersen = <span class="text-amber-300">20</span>;</p>
+                        <p><span class="text-sky-400">let</span> jumlahDiskon = (hargaAwal * diskonPersen) / <span class="text-amber-300">100</span>;</p>
+                        <p><span class="text-sky-400">let</span> hargaAkhir = hargaAwal - jumlahDiskon;</p>
+                        <p>console.log(<span class="text-emerald-300">"Total Bayar:"</span>, hargaAkhir); <span class="text-emerald-400">// 80000</span></p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN N -->
+                <section id="bagian-n" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">N</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 12: Penukaran Nilai Dua Variabel (Variable Swapping)</h2>
+                            <p class="text-xs text-slate-500">Menggunakan variabel penampung sementara (temp)</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-1">
+                        <p><span class="text-sky-400">let</span> a = <span class="text-emerald-300">"Merah"</span>;</p>
+                        <p><span class="text-sky-400">let</span> b = <span class="text-emerald-300">"Biru"</span>;</p>
+                        <p class="text-slate-400">// Proses tukar nilai:</p>
+                        <p><span class="text-sky-400">let</span> temp = a;</p>
+                        <p>a = b;</p>
+                        <p>b = temp;</p>
+                        <p>console.log(`a: ${a}, b: ${b}`); <span class="text-emerald-400">// a: Biru, b: Merah</span></p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN O -->
+                <section id="bagian-o" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">O</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 13: Operator Increment & Decrement</h2>
+                            <p class="text-xs text-slate-500">Penambahan dan pengurangan nilai secara instan</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+                        <div class="bg-slate-50 border p-3 rounded-xl">
+                            <span class="font-bold text-sky-600 block mb-1 font-sans">Increment (++):</span>
+                            let skor = 10;<br>
+                            skor++; // skor menjadi 11
+                        </div>
+                        <div class="bg-slate-50 border p-3 rounded-xl">
+                            <span class="font-bold text-rose-600 block mb-1 font-sans">Decrement (--):</span>
+                            let nyawa = 3;<br>
+                            nyawa--; // nyawa menjadi 2
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN P -->
+                <section id="bagian-p" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">P</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Aktivitas 14: Pemahaman Scope Variabel (Global vs Local)</h2>
+                            <p class="text-xs text-slate-500">Batasan aksesibilitas variabel di dalam fungsi/blok</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-1">
+                        <p><span class="text-sky-400">let</span> pesanGlobal = <span class="text-emerald-300">"Saya Global"</span>;</p>
+                        <p><span class="text-purple-400">function</span> tesScope() {</p>
+                        <p class="pl-4"><span class="text-sky-400">let</span> pesanLokal = <span class="text-emerald-300">"Saya Lokal"</span>;</p>
+                        <p class="pl-4">console.log(pesanGlobal); <span class="text-emerald-400">// Bisa diakses</span></p>
+                        <p>}</p>
+                        <p>tesScope();</p>
+                        <p><span class="text-rose-400">// console.log(pesanLokal); -> Error: pesanLokal is not defined</span></p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN Q -->
+                <section id="bagian-q" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">Q</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Quiz Singkat Pemahaman Variabel</h2>
+                            <p class="text-xs text-slate-500">Uji pengetahuan cepat materi JavaScript Variable</p>
+                        </div>
+                    </div>
+                    <div id="quiz-container" class="space-y-4 text-sm">
+                        <p class="font-semibold text-slate-800">Manakah dari kata kunci variabel berikut yang nilainya TIDAK dapat diubah kembali?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <button onclick="checkQuiz(this, false)" class="quiz-opt border border-slate-300 hover:bg-slate-100 p-3 rounded-xl font-mono text-center font-bold">var</button>
+                            <button onclick="checkQuiz(this, false)" class="quiz-opt border border-slate-300 hover:bg-slate-100 p-3 rounded-xl font-mono text-center font-bold">let</button>
+                            <button onclick="checkQuiz(this, true)" class="quiz-opt border border-slate-300 hover:bg-slate-100 p-3 rounded-xl font-mono text-center font-bold">const</button>
+                        </div>
+                        <div id="quiz-feedback" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN R -->
+                <section id="bagian-r" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">R</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Refleksi Peserta Didik</h2>
+                            <p class="text-xs text-slate-500">Tanggapan pemahaman mandiri terhadap materi LKPD</p>
+                        </div>
+                    </div>
+                    <div class="bg-sky-50 border border-sky-200 p-5 rounded-2xl text-sky-950 space-y-3">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-quote-left text-2xl text-sky-400"></i>
+                            <p class="text-sm sm:text-base font-semibold leading-relaxed italic">
+                                "Saya sudah memahami seluruh materi variabel JavaScript, mulai dari penggunaan keyword let dan const, jenis-jenis tipe data, aturan penulisan camelCase, hingga teknik debugging kode yang mengalami error dengan sangat baik."
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-sky-200/60 flex items-center justify-between text-xs font-bold text-sky-800">
+                            <span>Status Pemahaman: Fully Mastered (100%)</span>
+                            <span class="bg-emerald-500 text-white px-2.5 py-1 rounded-full"><i class="fa-solid fa-check mr-1"></i>Paham Semua</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN S -->
+                <section id="bagian-s" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">S</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Studi Kasus Tambahan: Aplikasi Hitung Nilai Rata-Rata</h2>
+                            <p class="text-xs text-slate-500">Implementasi variabel dalam logika perhitungan sederhana</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-1">
+                        <p><span class="text-purple-400">const</span> nilaiTugas = <span class="text-amber-300">85</span>;</p>
+                        <p><span class="text-purple-400">const</span> nilaiUTS = <span class="text-amber-300">90</span>;</p>
+                        <p><span class="text-purple-400">const</span> nilaiUAS = <span class="text-amber-300">95</span>;</p>
+                        <p><span class="text-sky-400">let</span> rataRata = (nilaiTugas + nilaiUTS + nilaiUAS) / <span class="text-amber-300">3</span>;</p>
+                        <p>console.log(<span class="text-emerald-300">`Rata-Rata Nilai: ${rataRata.toFixed(2)}`</span>); <span class="text-emerald-400">// 90.00</span></p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN T -->
+                <section id="bagian-t" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">T</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Tugas Individu: Program Data Produk Sederhana</h2>
+                            <p class="text-xs text-slate-500">Lampiran sintaks dan penjelasan program JavaScript lengkap</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs leading-relaxed border border-slate-800 overflow-x-auto">
+                            <p class="text-slate-500">// File: dataProduk.js</p>
+                            <p class="text-slate-500">// Dibuat oleh: Izhad Ananda Risan (X PPLG 2)</p>
+                            <br>
+                            <p><span class="text-purple-400">const</span> namaKategori = <span class="text-emerald-300">"Elektronik"</span>;</p>
+                            <p><span class="text-purple-400">const</span> namaProduk = <span class="text-emerald-300">"Mouse Gaming RGB"</span>;</p>
+                            <p><span class="text-purple-400">const</span> hargaSatuan = <span class="text-amber-300">250000</span>;</p>
+                            <p><span class="text-sky-400">let</span> stokTersedia = <span class="text-amber-300">15</span>;</p>
+                            <p><span class="text-sky-400">let</span> jumlahBeli = <span class="text-amber-300">2</span>;</p>
+                            <br>
+                            <p><span class="text-slate-400">// Perhitungan Total</span></p>
+                            <p><span class="text-sky-400">let</span> totalBiaya = hargaSatuan * jumlahBeli;</p>
+                            <p>stokTersedia -= jumlahBeli; <span class="text-slate-400">// Mengurangi stok</span></p>
+                            <br>
+                            <p>console.log(<span class="text-emerald-300">`==== STRUK PEMBELIAN ====`</span>);</p>
+                            <p>console.log(<span class="text-emerald-300">`Kategori     : ${namaKategori}`</span>);</p>
+                            <p>console.log(<span class="text-emerald-300">`Produk       : ${namaProduk}`</span>);</p>
+                            <p>console.log(<span class="text-emerald-300">`Total Bayar  : Rp ${totalBiaya.toLocaleString('id-ID')}`</span>);</p>
+                            <p>console.log(<span class="text-emerald-300">`Sisa Stok    : ${stokTersedia} unit`</span>);</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 mb-1">Penjelasan Singkat Kode Program:</p>
+                            <p>1. Menggunakan <code class="font-mono text-sky-700">const</code> untuk data konstan yang nilainya tidak berubah seperti nama kategori, nama produk, dan harga satuan.</p>
+                            <p>2. Menggunakan <code class="font-mono text-sky-700">let</code> untuk stok dan jumlah beli karena nilainya akan berubah seiring transaksi berjalan.</p>
+                            <p>3. Menggunakan template literals untuk pencetakan luaran yang rapi dan mudah dibaca.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN U -->
+                <section id="bagian-u" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">U</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Uji Coba Kode Interaktif</h2>
+                            <p class="text-xs text-slate-500">Coba kode JavaScript sederhana langsung di halaman ini</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <textarea id="live-code" rows="3" class="w-full font-mono text-xs p-3 bg-slate-900 text-emerald-400 rounded-xl focus:ring-2 focus:ring-sky-500 outline-none" spellcheck="false">let nama = "Izhad"; console.log("Halo " + nama + ", Selamat Belajar JS!");</textarea>
+                        <button onclick="runLiveCode()" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold rounded-xl shadow-md transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> Jalankan Kode
+                        </button>
+                        <div id="live-output" class="p-3 bg-slate-100 rounded-xl border border-slate-200 font-mono text-xs text-slate-800 min-h-[40px]">
+                            Output console akan muncul di sini...
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN V -->
+                <section id="bagian-v" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">V</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Vektor & Ilustrasi Memori Variabel</h2>
+                            <p class="text-xs text-slate-500">Visualisasi bagaimana memori menyimpan variabel</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 border rounded-xl text-center space-y-3">
+                        <div class="flex justify-center gap-4 flex-wrap">
+                            <div class="border-2 border-dashed border-sky-400 p-4 rounded-xl bg-sky-50 min-w-[120px]">
+                                <span class="text-xs text-sky-600 font-bold block">Alamat 0x01</span>
+                                <span class="font-mono text-sm font-bold text-slate-800">let nama</span>
+                                <div class="mt-2 bg-sky-600 text-white text-xs py-1 rounded">"Izhad"</div>
+                            </div>
+                            <div class="border-2 border-dashed border-purple-400 p-4 rounded-xl bg-purple-50 min-w-[120px]">
+                                <span class="text-xs text-purple-600 font-bold block">Alamat 0x02</span>
+                                <span class="font-mono text-sm font-bold text-slate-800">const umur</span>
+                                <div class="mt-2 bg-purple-600 text-white text-xs py-1 rounded">16</div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500">Variabel memetakan nama unik ke lokasi penyimpanan data di memori RAM.</p>
+                    </div>
+                </section>
+
+                <!-- BAGIAN W -->
+                <section id="bagian-w" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">W</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Waktu & Tanggal Pengerjaan LKPD</h2>
+                            <p class="text-xs text-slate-500">Log waktu penyelesaian tugas oleh siswa</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700">
+                        <div class="flex justify-between border-b pb-2">
+                            <span>Status Penyelesaian:</span>
+                            <span class="font-bold text-emerald-600">Selesai Lengkap (A-Z)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Waktu Penyerahan LKPD:</span>
+                            <span class="font-mono font-semibold" id="timestamp-display">Jumat, 23 Oktober 2026</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN X -->
+                <section id="bagian-x" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">X</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">X-Tension & Tools yang Direkomendasikan</h2>
+                            <p class="text-xs text-slate-500">Ekstensi VS Code untuk pengembangan JavaScript</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div class="p-3 border rounded-xl bg-slate-50">
+                            <i class="fa-solid fa-bolt text-amber-500 text-lg mb-1"></i>
+                            <p class="font-bold text-slate-800">Live Server</p>
+                            <p class="text-slate-500">Melihat perubahan halaman secara langsung.</p>
+                        </div>
+                        <div class="p-3 border rounded-xl bg-slate-50">
+                            <i class="fa-solid fa-code text-sky-500 text-lg mb-1"></i>
+                            <p class="font-bold text-slate-800">Prettier</p>
+                            <p class="text-slate-500">Merapikan format kode JavaScript secara otomatis.</p>
+                        </div>
+                        <div class="p-3 border rounded-xl bg-slate-50">
+                            <i class="fa-solid fa-bug text-rose-500 text-lg mb-1"></i>
+                            <p class="font-bold text-slate-800">ESLint</p>
+                            <p class="text-slate-500">Mendeteksi potensi kesalahan/bug kode.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN Y -->
+                <section id="bagian-y" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-600 text-white font-black text-xl flex items-center justify-center shadow-md">Y</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Yang Dinilai / Catatan & Rubrik Guru Pengampu</h2>
+                            <p class="text-xs text-slate-500">Formulir evaluasi, skor akhir, dan masukan guru</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                            <div class="bg-white p-3 rounded-xl border shadow-sm">
+                                <span class="text-xs text-slate-500 block">Skor Tugas (0-100)</span>
+                                <span class="text-2xl font-black text-slate-300">-</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border shadow-sm">
+                                <span class="text-xs text-slate-500 block">Paraf Guru</span>
+                                <span class="text-2xl font-black text-slate-300">-</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border shadow-sm">
+                                <span class="text-xs text-slate-500 block">Tanggal Penilaian</span>
+                                <span class="text-2xl font-black text-slate-300">-</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-slate-700 block mb-1">Catatan & Tanggapan Guru:</span>
+                            <div class="w-full p-3 bg-white border border-slate-300 rounded-xl text-slate-400 italic text-xs min-h-[60px]">
+                                (Dibiarkan kosong untuk diisi oleh Guru Pengampu)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BAGIAN Z -->
+                <section id="bagian-z" class="bg-gradient-to-br from-sky-900 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-10 h-10 rounded-xl bg-sky-500 text-slate-900 font-black text-xl flex items-center justify-center shadow-md">Z</span>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Zonasi Pesan Motivasi & Inspirasi Pembelajar</h2>
+                            <p class="text-xs text-sky-200">Pesan penutup untuk peserta didik PPLG</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 relative z-10">
+                        <div class="bg-white/10 backdrop-blur border border-white/10 p-5 rounded-2xl">
+                            <p class="text-base sm:text-lg font-medium leading-relaxed text-sky-100 italic">
+                                "Jangan pernah takut bertemu dengan <span class="text-rose-300 font-mono font-bold">Error</span> saat menulis kode JavaScript. Error bukanlah bukti kegagalan, melainkan petunjuk ilmiah yang membimbing programmer menuju pemahaman yang jauh lebih dalam. Teruslah berkarya dan bertumbuh!"
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-sky-300 pt-2">
+                            <span>#PPLGBisa #JavaScriptMastery</span>
+                            <span>Semangat Belajar, Izhad! 🚀</span>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- FLOATING BACK TO TOP BUTTON -->
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 w-12 h-12 bg-sky-600 hover:bg-sky-700 text-white rounded-full shadow-2xl flex items-center justify-center text-lg transition-all opacity-0 pointer-events-none z-50">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p>© 2026 LKPD Interaktif Dasar-Dasar Pengembangan Perangkat Lunak dan Gim.</p>
+            <p class="text-slate-500">Dikembangkan oleh <strong class="text-slate-300">Izhad Ananda Risan</strong> (X PPLG 2)</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        const letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+        // Titles mapping for sidebar and buttons
+        const sectionTitles = {
+            'A': 'Aktivitas 1: Dasar Console',
+            'B': 'Bahan Bacaan & Teori',
+            'C': 'Catatan Aturan Naming',
+            'D': 'Aktivitas 2: Perbaikan const',
+            'E': 'Aktivitas 3: Aritmatika',
+            'F': 'Aktivitas 4: Tipe Data',
+            'G': 'Aktivitas 5: typeof',
+            'H': 'Aktivitas 6: Concatenation',
+            'I': 'Aktivitas 7: Konversi Data',
+            'J': 'Aktivitas 8: camelCase',
+            'K': 'Aktivitas 9: Tantangan Biodata',
+            'L': 'Aktivitas 10: Debugging Bug',
+            'M': 'Aktivitas 11: Diskon Belanja',
+            'N': 'Aktivitas 12: Penukaran Nilai',
+            'O': 'Aktivitas 13: Increment',
+            'P': 'Aktivitas 14: Scope Variabel',
+            'Q': 'Quiz Pemahaman',
+            'R': 'Refleksi Peserta Didik',
+            'S': 'Studi Kasus Rata-Rata',
+            'T': 'Tugas Individu Program',
+            'U': 'Uji Coba Kode Interaktif',
+            'V': 'Vektor Visual Memori',
+            'W': 'Waktu Pengerjaan LKPD',
+            'X': 'X-Tension Developer',
+            'Y': 'Yang Dinilai / Catatan Guru',
+            'Z': 'Zonasi Pesan Motivasi'
+        };
+
+        // Render A-Z Nav Bar & Sidebar Menu
+        const azContainer = document.getElementById('az-nav-container');
+        const sidebarMenu = document.getElementById('sidebar-menu');
+
+        letters.forEach(letter => {
+            const lower = letter.toLowerCase();
+            
+            // Top Nav Button
+            const navBtn = document.createElement('a');
+            navBtn.href = `#bagian-${lower}`;
+            navBtn.id = `nav-btn-${lower}`;
+            navBtn.className = `az-link px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 bg-slate-50 text-slate-700 hover:bg-sky-600 hover:text-white transition-all flex items-center justify-center min-w-[28px]`;
+            navBtn.innerText = letter;
+            azContainer.appendChild(navBtn);
+
+            // Sidebar Link
+            const sideLink = document.createElement('a');
+            sideLink.href = `#bagian-${lower}`;
+            sideLink.id = `side-link-${lower}`;
+            sideLink.className = `sidebar-link block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-sky-50 hover:text-sky-700 transition-all font-medium flex items-center justify-between`;
+            sideLink.innerHTML = `<span><strong class="text-sky-600 mr-1.5">${letter}.</strong> ${sectionTitles[letter]}</span>`;
+            sidebarMenu.appendChild(sideLink);
+        });
+
+        // Live JavaScript Runner in Bagian U
+        function runLiveCode() {
+            const code = document.getElementById('live-code').value;
+            const outputDiv = document.getElementById('live-output');
+            outputDiv.innerHTML = '';
+
+            let logs = [];
+            const customConsole = {
+                log: function(...args) {
+                    logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '));
+                }
+            };
+
+            try {
+                const runFunc = new Function('console', code);
+                runFunc(customConsole);
+                outputDiv.className = "p-3 bg-slate-900 text-emerald-400 rounded-xl font-mono text-xs border border-emerald-500/30";
+                outputDiv.innerText = logs.length > 0 ? logs.join('\n') : "Kode berhasil dijalankan tanpa output console.";
+            } catch (err) {
+                outputDiv.className = "p-3 bg-rose-950 text-rose-300 rounded-xl font-mono text-xs border border-rose-500/30";
+                outputDiv.innerText = "Error: " + err.message;
+            }
+        }
+
+        // Quiz Logic for Bagian Q
+        function checkQuiz(btn, isCorrect) {
+            const feedback = document.getElementById('quiz-feedback');
+            const allOpts = document.querySelectorAll('.quiz-opt');
+            
+            allOpts.forEach(opt => {
+                opt.classList.remove('bg-emerald-600', 'bg-rose-600', 'text-white');
+            });
+
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+
+            if (isCorrect) {
+                btn.classList.add('bg-emerald-600', 'text-white');
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Tepat sekali! Variabel yang dideklarasikan dengan <code>const</code> nilainya bersifat tetap dan tidak dapat di-reassign.';
+            } else {
+                btn.classList.add('bg-rose-600', 'text-white');
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1"></i> Kurang tepat. Variabel <code>var</code> dan <code>let</code> nilainya masih bisa diubah kembali.';
+            }
+        }
+
+        // Scroll Active Highlighting & Back To Top
+        window.addEventListener('scroll', () => {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            // Highlight Active Section
+            let currentActive = '';
+            letters.forEach(letter => {
+                const section = document.getElementById(`bagian-${letter.toLowerCase()}`);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 150) {
+                        currentActive = letter.toLowerCase();
+                    }
+                }
+            });
+
+            if (currentActive) {
+                document.querySelectorAll('.az-link').forEach(el => el.classList.remove('az-badge-active'));
+                document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('bg-sky-100', 'text-sky-800', 'font-bold'));
+                
+                const activeNav = document.getElementById(`nav-btn-${currentActive}`);
+                const activeSide = document.getElementById(`side-link-${currentActive}`);
+                
+                if (activeNav) activeNav.classList.add('az-badge-active');
+                if (activeSide) activeSide.classList.add('bg-sky-100', 'text-sky-800', 'font-bold');
+            }
+        });
+    </script>
+</body>
+</html>
